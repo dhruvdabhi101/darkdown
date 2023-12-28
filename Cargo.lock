@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "darkdown-rs"
-version = "0.1.0"
+name = "darkdown"
+version = "0.1.1"

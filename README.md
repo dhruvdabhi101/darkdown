@@ -21,5 +21,5 @@ Darkdown is a markup language created solely for learning and understanding fund
 
 This is very first implementation of **Darkdown**. You are welcome to make any changes to the language.
 
-
+[Documentation](https://dhruvdabhi101.github.io/darkdown-docs/)
 [LICENSE](LICENSE)
