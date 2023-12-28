@@ -1,7 +1,9 @@
 [package]
-name = "darkdown-rs"
+name = "darkdown"
 version = "0.1.0"
-edition = "2021"
+edition = "2023"
+description = "A darkdown(our own markup language) parser written in rust"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
