@@ -29,6 +29,10 @@ This is syntax of my own markup language.
         let file_name = &args[1];
         let file_content = std::fs::read_to_string(file_name).unwrap();
         let file_name_without_ext = file_name.split(".").collect::<Vec<&str>>()[0];
+        let ext = file_name.split(".").collect::<Vec<&str>>()[1];
+        if ext != "dd" {
+            panic!("File extension is not supported");
+        }
         let html_file_name = format!("{}.html", file_name_without_ext);
 
 

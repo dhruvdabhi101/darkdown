@@ -11,13 +11,14 @@ impl Converter {
 
     pub fn convert_to_html(&mut self, markup: &str) -> String {
         let mut html = String::new();
+        let mut in_list = false;
 
         for line in markup.lines() {
             if line.starts_with("@") {
                 html.push_str(&format!("<h1>{}</h1>", &line[2..]));
             } else if line.starts_with("**") && line.ends_with("**") {
                 html.push_str(&format!("<strong>{}</strong>", &line[2..line.len() - 2]));
-            } else if line.starts_with("*") && line.ends_with("*") {
+            } else if line.starts_with("^") && line.ends_with("^") {
                 html.push_str(&format!("<em>{}</em>", &line[1..line.len() - 1]));
             } else if line.starts_with("\\") && line.ends_with("\\") {
                 html.push_str(&format!("<code>{}</code>", &line[1..line.len() - 1]));
@@ -36,13 +37,27 @@ impl Converter {
                 }
             } else if line.starts_with("---") {
                 html.push_str("<hr>");
+            } else if line.starts_with(">") {
+                if !in_list {
+                    html.push_str("<ul>");
+                    in_list = true;
+                }
+                html.push_str(&format!("<li>{}</li>", &line[2..]));
+
             } else {
+                if in_list {
+                    html.push_str("</ul>");
+                    in_list = false;
+                }
                 html.push_str(&format!("{}<br>", line));
             }
         }
 
         if self.in_code_block {
             html.push_str("</pre>");
+        }
+        if in_list {
+            html.push_str("</ul>");
         }
 
         html
