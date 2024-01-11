@@ -14,7 +14,7 @@ Darkdown is a markup language created solely for learning and understanding fund
 @ Headings
 
 ** bold text **
-* italic text *
+^ italic text ^
 
 \ inline code blocks \
 ```

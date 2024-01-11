@@ -18,7 +18,7 @@ impl Converter {
     /// * `String` - The HTML
     /// # Examples
     /// ```
-    /// use markup::converter::Converter;
+    /// use darkdown::converter::converter::Converter;
     /// let mut converter = Converter::new();
     /// let html = converter.convert_to_html("@ Title");
     /// assert_eq!(html, "<h1>Title</h1>");
