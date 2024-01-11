@@ -2,7 +2,7 @@ use std::{fs::{File, self}, io::Write};
 
 use crate::converter::converter::Converter;
 
-mod converter;
+pub mod converter;
 
 fn main() {
     let custom_markup = r#"
@@ -10,7 +10,7 @@ fn main() {
 
 **bold**
 
-*Italic*
+^Italic^
 
 \Code\
 

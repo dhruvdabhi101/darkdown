@@ -1,3 +1,5 @@
+/// # Converter
+/// Converts markup to HTML
 pub struct Converter {
     in_code_block: bool,
 }
@@ -9,6 +11,18 @@ impl Converter {
         }
     }
 
+    /// Converts markup to HTML
+    /// # Arguments
+    /// * `markup` - The markup to convert
+    /// # Returns
+    /// * `String` - The HTML
+    /// # Examples
+    /// ```
+    /// use markup::converter::Converter;
+    /// let mut converter = Converter::new();
+    /// let html = converter.convert_to_html("@ Title");
+    /// assert_eq!(html, "<h1>Title</h1>");
+    /// ```
     pub fn convert_to_html(&mut self, markup: &str) -> String {
         let mut html = String::new();
         let mut in_list = false;
