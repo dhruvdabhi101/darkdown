@@ -16,7 +16,9 @@ Darkdown is a markup language created solely for learning and understanding fund
 ** bold text **
 ^ italic text ^
 
-\ inline code blocks \
+\inline code blocks\
+
+~~Text~~Link~~
 ```
 
 This is very first implementation of **Darkdown**. You are welcome to make any changes to the language.

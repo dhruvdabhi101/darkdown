@@ -22,6 +22,8 @@ impl Converter {
     /// let mut converter = Converter::new();
     /// let html = converter.convert_to_html("@ Title");
     /// assert_eq!(html, "<h1>Title</h1>");
+    /// let html = converter.convert_to_html("**Bold**");
+    /// assert_eq!(html, "<strong>Bold</strong>");
     /// ```
     pub fn convert_to_html(&mut self, markup: &str) -> String {
         let mut html = String::new();
@@ -44,9 +46,9 @@ impl Converter {
                     html.push_str("<pre>");
                     self.in_code_block = true;
                 }
-            } else if line.starts_with("~~") && line.ends_with("~~Link~~") {
+            } else if line.starts_with("~~") && line.ends_with("~~") {
                 let parts: Vec<&str> = line.split("~~").collect();
-                if let [text, _, link, _] = parts[..] {
+                if let [_, text, link, _] = parts[..] {
                     html.push_str(&format!("<a href='{}'>{}</a>", link, text));
                 }
             } else if line.starts_with("---") {
@@ -75,5 +77,43 @@ impl Converter {
         }
 
         html
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_title() {
+        let mut converter = Converter::new();
+        let html = converter.convert_to_html("@ Title");
+        assert_eq!(html, "<h1>Title</h1>");
+    }
+    #[test]
+    fn test_bold_italic() {
+        let mut converter = Converter::new();
+        let html = converter.convert_to_html("**Bold**");
+        assert_eq!(html, "<strong>Bold</strong>");
+        let html = converter.convert_to_html("^Italic^");
+        assert_eq!(html, "<em>Italic</em>");
+    }
+    #[test]
+    fn test_link_and_code() {
+        let mut converter = Converter::new();
+        let html = converter.convert_to_html("\\Code\\");
+        assert_eq!(html, "<code>Code</code>");
+        let html = converter.convert_to_html("~~Link~~Link~~");
+        assert_eq!(html, "<a href='Link'>Link</a>");
+        let html = converter.convert_to_html("---");
+        assert_eq!(html, "<hr>");
+    }
+    #[test]
+    fn test_list_and_line() {
+        let mut converter = Converter::new();
+        let html = converter.convert_to_html("> List");
+        assert_eq!(html, "<ul><li>List</li></ul>");
+        let html = converter.convert_to_html("Line");
+        assert_eq!(html, "Line<br>");
     }
 }
