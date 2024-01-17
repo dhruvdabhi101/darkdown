@@ -1,4 +1,7 @@
-use std::{fs::{File, self}, io::Write};
+use std::{
+    fs::{self, File},
+    io::Write,
+};
 
 use crate::converter::converter::Converter;
 
@@ -24,7 +27,7 @@ Code
 
 This is syntax of my own markup language.
 "#;
-    let args:Vec<_> = std::env::args().collect();
+    let args: Vec<_> = std::env::args().collect();
     if args.len() > 1 {
         let file_name = &args[1];
         let file_content = std::fs::read_to_string(file_name).unwrap();
@@ -34,7 +37,6 @@ This is syntax of my own markup language.
             panic!("File extension is not supported");
         }
         let html_file_name = format!("{}.html", file_name_without_ext);
-
 
         let mut converter = Converter::new();
         let html_output = converter.convert_to_html(&file_content);

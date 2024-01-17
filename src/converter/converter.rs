@@ -59,7 +59,6 @@ impl Converter {
                     in_list = true;
                 }
                 html.push_str(&format!("<li>{}</li>", &line[2..]));
-
             } else {
                 if in_list {
                     html.push_str("</ul>");
