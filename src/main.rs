@@ -1,13 +1,9 @@
-use std::{
-    fs::{self, File},
-    io::Write,
-};
-
+use std::fs::{self, File};
 use crate::converter::converter::Converter;
-
 pub mod converter;
 
 fn main() {
+    #[allow(unused_variables)]
     let custom_markup = r#"
 @ Heading 1
 
@@ -40,7 +36,7 @@ This is syntax of my own markup language.
 
         let mut converter = Converter::new();
         let html_output = converter.convert_to_html(&file_content);
-        let mut data_file = File::create(html_file_name.clone()).expect("creation failed");
+        File::create(html_file_name.clone()).expect("creation failed");
         fs::write(html_file_name, html_output).expect("Unable to write file");
     }
 }
